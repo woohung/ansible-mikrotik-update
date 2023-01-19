@@ -1,0 +1,8 @@
+---
+- name: Upgrade Mikrorik RouterBOARD firmware
+  hosts: all_routers
+  gather_facts: no
+
+  tasks:
+    - name: "INCLUDE -> Check > Upgrade RouterBOARD > Reboot"
+      include_tasks: "../tasks/02_upgrade_rb.ymll"

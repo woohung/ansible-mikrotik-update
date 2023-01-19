@@ -1,0 +1,17 @@
+---
+- name: Set RouterOS firmware channel
+  routeros_command:
+    commands:
+      - /system package update set channel={{channel}}
+
+- name: Check for updates
+  routeros_command:
+    commands:
+      - /system package update check-for-updates
+  register: check_result
+- set_fact: status={{ check_result.stdout_lines[0] | regex_search('System is already+') }}
+
+- name: Upgrade RouterOS
+  routeros_command:
+    commands: /system package update install
+  when: status != "System is already"

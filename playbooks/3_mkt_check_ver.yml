@@ -1,0 +1,14 @@
+---
+- name: Checking Mikrotik RouterOS/RouterBOARD
+  hosts: all_routers
+  gather_facts: no
+  ignore_errors: true
+  vars:
+    version: "6.48.6"
+
+  tasks:
+    - name: "INCLUDE -> Check RouterOS version"
+      include_tasks: "../tasks/03_check_ros_version.yml"
+
+    - name: "INCLUDE -> Check RouterBOARD version"
+      include_tasks: "../tasks/04_check_rb_version.yml"

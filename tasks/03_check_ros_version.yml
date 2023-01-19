@@ -1,0 +1,10 @@
+---
+- name: Get RouterOS facts
+  routeros_facts:
+  register: routeros_facts
+
+- name: Checking up to date RouterOS firmware
+  debug:
+    msg: "RouterOS version on {{ inventory_hostname }} is now up to date."
+  when: routeros_facts.ansible_facts.ansible_net_version[:-1] | regex_search("\d.\d+.\d") == version
+

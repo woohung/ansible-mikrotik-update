@@ -1,0 +1,9 @@
+---
+- name: Upgrade Mikrorik RouterOS firmware
+  hosts: all_routers
+  gather_facts: no
+  vars:
+    channel: "long-term"
+  tasks:
+    - name: "INCLUDE -> Check > Upgrade RouterOS (default: long-term)"
+      include_tasks: "../tasks/01_upgrade_ros.yml"

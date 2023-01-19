@@ -1,0 +1,5 @@
+---
+- name: Restore default LAN IP
+  routeros_command:
+    commands:
+      - /ip address set address={{default_ip}} interface={{intf}} numbers=0

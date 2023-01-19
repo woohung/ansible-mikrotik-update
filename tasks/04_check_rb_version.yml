@@ -1,0 +1,13 @@
+---
+- name: Get routerBOARD version
+  routeros_command:
+    commands:
+      - /system routerboard print
+  register: rb_version
+- set_fact: current={{ rb_version.stdout_lines[0][-2].split()[-1] }}
+- set_fact: upgrade={{ rb_version.stdout_lines[0][-1].split()[-1] }}
+
+- name: Checking up to date RouterBOARD firmware
+  debug:
+    msg: "RouterBOARD version on {{ inventory_hostname }} is now up to date."
+  when: current == upgrade

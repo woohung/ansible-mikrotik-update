@@ -1,0 +1,11 @@
+---
+- name: Clear DNS
+  routeros_command:
+    commands:
+      - /ip dns set servers=""
+
+- name: Clear routes
+  routeros_command:
+    commands:
+      - /ip route remove [find gateway="{{gw}}"]
+

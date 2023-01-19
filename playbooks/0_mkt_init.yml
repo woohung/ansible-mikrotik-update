@@ -1,0 +1,9 @@
+---
+- name: Minimal configuration for internet access
+  hosts: all_routers
+  gather_facts: no
+
+  tasks:
+    - name: "INCLUDE -> Initial configuration"
+      include_tasks: "../tasks/00_init_config.yml"
+

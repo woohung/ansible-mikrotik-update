@@ -1,0 +1,10 @@
+---
+- name: set DNS
+  routeros_command:
+    commands:
+      - /ip dns set servers=77.88.8.8
+
+- name: set default route
+  routeros_command:
+    commands:
+      - /ip route add gateway=192.168.88.2

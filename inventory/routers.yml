@@ -1,0 +1,14 @@
+---
+mkt_lite:
+  hosts:
+    192.168.88.[3-50]:
+
+all_routers:
+  children:
+    mkt_lite:
+  vars:
+    ansible_host_key_cheking: false
+    ansible_user: admin
+    ansible_password: 
+    ansible_connection: ansible.netcommon.network_cli
+    ansible_network_os: routeros

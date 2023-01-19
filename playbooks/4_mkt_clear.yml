@@ -1,0 +1,20 @@
+---
+- name: Clear initial config and set default IP
+  hosts: all_routers
+  gather_facts: no
+  ignore_errors: true
+
+  vars:
+    gw: "192.168.88.2"
+    default_ip: "192.168.88.1/24"
+    intf: "bridge"
+
+  tasks:
+    - name: "INCLUDE -> Clear DNS/Routes"
+      include_tasks: "../tasks/05_clear_config.yml"
+
+    - name: "INCLUDE -> Remove reboot script"
+      include_tasks: "../tasks/06_remove_reboot_script.yml"
+
+    - name: "INCLUDE -> Set default IP"
+      include_tasks: "../tasks/07_set_default_ip.yml"

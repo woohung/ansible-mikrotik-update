@@ -1,0 +1,20 @@
+---
+- name: Check for routerBOARD upgrade
+  routeros_command:
+    commands:
+      - /system routerboard print
+  register: task_result_upgrade
+- set_fact: current={{ task_result_upgrade.stdout_lines[0][-2].split()[-1] }}
+- set_fact: upgrade={{ task_result_upgrade.stdout_lines[0][-1].split()[-1] }}
+
+- name: Upgrade routerBOARD
+  routeros_command:
+    commands:
+      - :execute script="/system routerboard upgrade"
+  when: current != upgrade
+
+- name: Reboot
+  routeros_command:
+    commands:
+      - /system scheduler add name=rebootonce on-event="/system reboot" start-time=([/system clock get time] + 00:00:30)
+  when: current != upgrade
